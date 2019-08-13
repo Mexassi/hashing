@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "blakejs": "^1.1.0",
     "chalk": "^2.4.2",
     "hash.js": "^1.1.7",
     "inquirer": "^6.5.1",

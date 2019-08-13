@@ -8,6 +8,7 @@
     const hash = require('hash.js');
     const murmurhash = require('murmurhash');
     const RIPEMD160 = require('ripemd160');
+    const blake = require('blakejs')
 
     const Algos = {
         MD5: 'md5',
@@ -16,7 +17,9 @@
         SHA256: 'sha256',
         SHA512: 'sha512',
         MURMUR: 'murmur',
-        RIPEMD160: 'ripemd160'
+        RIPEMD160: 'ripemd160',
+        BLAKE2B: 'blake2bHex',
+        BLAKE2S: 'blake2sHex'
     };
 
     inquirer
@@ -25,7 +28,17 @@
                 type: 'list',
                 name: 'algo',
                 message: 'Which hashing algorithm do you want to use?',
-                choices: [Algos.MD5, Algos.SHA1, Algos.SHA224, Algos.SHA256, Algos.SHA512, Algos.MURMUR, Algos.RIPEMD160]
+                choices: [
+                    Algos.BLAKE2B,
+                    Algos.BLAKE2S,
+                    Algos.MD5,
+                    Algos.MURMUR, 
+                    Algos.RIPEMD160,
+                    Algos.SHA1, 
+                    Algos.SHA224, 
+                    Algos.SHA256, 
+                    Algos.SHA512
+                ]
             }
         ])
         .then(answers => {
@@ -60,7 +73,11 @@
                             break;    
                         case Algos.RIPEMD160:
                             hashed = new RIPEMD160().update(text).digest('hex')
-                            break;    
+                            break; 
+                        case Algos.BLAKE2B:
+                        case Algos.BLAKE2S:
+                            hashed = blake[algo](text);
+                            break;   
                         default:
                             throw new Error(`${algo} not supported`);
                     }
