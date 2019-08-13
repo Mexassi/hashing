@@ -15,7 +15,7 @@
         SHA224: 'sha224',
         SHA256: 'sha256',
         SHA512: 'sha512',
-        MURMUR: 'murmurhash',
+        MURMUR: 'murmur',
         RIPEMD160: 'ripemd160'
     };
 
