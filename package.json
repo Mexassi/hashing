@@ -17,6 +17,7 @@
     "hash.js": "^1.1.7",
     "inquirer": "^6.5.1",
     "md5": "^2.2.1",
-    "murmurhash": "0.0.2"
+    "murmurhash": "0.0.2",
+    "ripemd160": "^2.0.2"
   }
 }

@@ -6,7 +6,8 @@
     const inquirer = require('inquirer');
     const chalk = require('chalk');
     const hash = require('hash.js');
-    const murmurhash = require('murmurhash')
+    const murmurhash = require('murmurhash');
+    const RIPEMD160 = require('ripemd160');
 
     const Algos = {
         MD5: 'md5',
@@ -14,7 +15,8 @@
         SHA224: 'sha224',
         SHA256: 'sha256',
         SHA512: 'sha512',
-        MURMUR: 'murmurhash'
+        MURMUR: 'murmurhash',
+        RIPEMD160: 'ripemd160'
     };
 
     inquirer
@@ -23,7 +25,7 @@
                 type: 'list',
                 name: 'algo',
                 message: 'Which hashing algorithm do you want to use?',
-                choices: [Algos.MD5, Algos.SHA1, Algos.SHA224, Algos.SHA256, Algos.SHA512, Algos.MURMUR]
+                choices: [Algos.MD5, Algos.SHA1, Algos.SHA224, Algos.SHA256, Algos.SHA512, Algos.MURMUR, Algos.RIPEMD160]
             }
         ])
         .then(answers => {
@@ -55,6 +57,9 @@
                             break;
                         case Algos.MURMUR:
                             hashed = murmurhash.v3(text);
+                            break;    
+                        case Algos.RIPEMD160:
+                            hashed = new RIPEMD160().update(text).digest('hex')
                             break;    
                         default:
                             throw new Error(`${algo} not supported`);
