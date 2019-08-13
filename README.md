@@ -1,0 +1,1 @@
+# Tool to hash a string
